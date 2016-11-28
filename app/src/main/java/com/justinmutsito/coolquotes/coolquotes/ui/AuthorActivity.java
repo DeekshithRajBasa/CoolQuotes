@@ -26,7 +26,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class AuthorActivity extends AppCompatActivity {
     private String[] mQuotes;
-    private int mQuotePosition = 0;
+    private int mQuotePosition;
     private DBOpenHelper mDBOpenHelper;
 
     @Bind(R.id.backgroundImage)

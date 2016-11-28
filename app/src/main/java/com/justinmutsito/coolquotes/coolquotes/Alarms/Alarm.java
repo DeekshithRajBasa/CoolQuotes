@@ -14,15 +14,14 @@ import java.util.Calendar;
  */
 public class Alarm {
 
-    private Context mContext;
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
 
     public Alarm(Context context) {
-        mContext = context;
-        alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(mContext, AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
+
+        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 
     public void setAlarm(int hour,int minute) {

@@ -27,42 +27,25 @@ public class SettingsActivity extends AppCompatActivity {
     private int mNotificationTime;
 
 
-    @Bind(R.id.themeLabel)
-    TextView mThemeLabel;
-    @Bind(R.id.notificationsLabel)
-    TextView mNotificationLabel;
-    @Bind(R.id.brownCheckbox)
-    CircleButton mBrown;
-    @Bind(R.id.blueCheckbox)
-    CircleButton mBlue;
-    @Bind(R.id.offCheckbox)
-    CircleButton mOff;
-    @Bind(R.id.onCheckbox)
-    CircleButton mOn;
+    @Bind(R.id.themeLabel) TextView mThemeLabel;
+    @Bind(R.id.notificationsLabel) TextView mNotificationLabel;
+    @Bind(R.id.brownCheckbox) CircleButton mBrown;
+    @Bind(R.id.blueCheckbox) CircleButton mBlue;
+    @Bind(R.id.offCheckbox) CircleButton mOff;
+    @Bind(R.id.onCheckbox) CircleButton mOn;
 
-    @Bind(R.id.offLabel)
-    TextView mOffLabel;
-    @Bind(R.id.onLabel)
-    TextView mOnLabel;
+    @Bind(R.id.offLabel) TextView mOffLabel;
+    @Bind(R.id.onLabel) TextView mOnLabel;
 
-    @Bind(R.id.aboutButton)
-    Button mAbout;
-    @Bind(R.id.backgroundImage)
-    ImageView mBackgroundImage;
-    @Bind(R.id.fadedImage)
-    ImageView mFadedImage;
-    @Bind(R.id.zBrownLabel)
-    TextView mThemeBrownLabel;
-    @Bind(R.id.cBlueLabel)
-    TextView mThemeBlueLabel;
-    @Bind(R.id.layout1)
-    LinearLayout mLayout1;
-    @Bind(R.id.layout2)
-    LinearLayout mLayout2;
-    @Bind(R.id.layout3)
-    LinearLayout mLayout3;
-    @Bind(R.id.layout4)
-    LinearLayout mLayout4;
+    @Bind(R.id.aboutButton) Button mAbout;
+    @Bind(R.id.backgroundImage) ImageView mBackgroundImage;
+    @Bind(R.id.fadedImage) ImageView mFadedImage;
+    @Bind(R.id.zBrownLabel) TextView mThemeBrownLabel;
+    @Bind(R.id.cBlueLabel) TextView mThemeBlueLabel;
+    @Bind(R.id.layout1) LinearLayout mLayout1;
+    @Bind(R.id.layout2) LinearLayout mLayout2;
+    @Bind(R.id.layout3) LinearLayout mLayout3;
+    @Bind(R.id.layout4) LinearLayout mLayout4;
 
 
     @Override
@@ -72,12 +55,11 @@ public class SettingsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mPreferences = new Preferences(this);
+        mAlarm = new Alarm(SettingsActivity.this);
 
-
-        //Get theme and notification time, set theme..
+        //Get and set theme, notification time.
         mTheme = mPreferences.getMyTheme();
         mNotificationTime = mPreferences.getNotificationTime();
-        mAlarm = new Alarm(SettingsActivity.this);
         setNotificationTime();
         setMyTheme(mTheme);
 
