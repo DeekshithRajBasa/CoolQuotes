@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".97"
             android:padding="5dp"
-            android:text="@string/on"
+            android:text="@string/test_time"
             android:textSize="15sp"
 
             />

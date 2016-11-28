@@ -45,6 +45,7 @@
     <string name="set">Set</string>
     <string name="launch">launchKey</string>
     <string name="change_theme">You can change the theme,check settings.</string>
+    <string name="test_time">06:00 AM</string>
 
 
     <string-array name="quotesOptions">

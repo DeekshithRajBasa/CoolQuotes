@@ -78,11 +78,48 @@ public class SettingsActivity extends AppCompatActivity {
         mTheme = mPreferences.getMyTheme();
         mNotificationTime = mPreferences.getNotificationTime();
         mAlarm = new Alarm(SettingsActivity.this);
+        setNotificationTime();
         setMyTheme(mTheme);
 
 
     }
 
+    private void setNotificationTime() {
+        int time = mPreferences.getNotificationTime();
+        if (time == 0) {
+            mOnLabel.setText(R.string.on);
+        } else {
+            int hour = time / 3600;
+            int minute = (time - (hour * 3600)) / 60;
+            setNotificationLabel(hour, minute);
+
+        }
+
+    }
+
+    private void setNotificationLabel(int hour, int minute) {
+
+        String setTime;
+        if (hour < 12) {
+            if (minute < 10) {
+                setTime = "0" + hour + ":0" + minute + " AM";
+            } else {
+                setTime = "0" + hour + ":" + minute + " AM";
+            }
+
+        } else {
+            int rightHour = hour - 12;
+
+            if (minute < 10) {
+                setTime = "0" + rightHour + ":0" + minute + " PM";
+            } else {
+                setTime = "0" + rightHour + ":" + minute + " PM";
+            }
+
+        }
+
+        mOnLabel.setText(setTime);
+    }
 
     @OnClick(R.id.brownCheckbox)
     public void setBrown() {
@@ -126,6 +163,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void setNotificationOff() {
         mAlarm.cancel();
         mPreferences.setNotificationTime(0);
+        mOnLabel.setText(R.string.on);
 
         if (mTheme.equals("brown")) {
             mOn.setImageResource(R.drawable.ic_checkbox_blank_circle_outline_grey600_48dp);
@@ -163,6 +201,7 @@ public class SettingsActivity extends AppCompatActivity {
                 mPreferences.setNotificationTime(time);
                 mAlarm.cancel();
                 mAlarm.setAlarm(hour, minute);
+                setNotificationLabel(hour, minute);
                 dialog.dismiss();
             }
         });
@@ -193,6 +232,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (mTheme.equals("brown")) {
             mOn.setImageResource(R.drawable.ic_checkbox_blank_circle_outline_grey600_48dp);
             mOff.setImageResource(R.drawable.ic_checkbox_marked_circle_grey600_48dp);
+            mOnLabel.setText(R.string.on);
 
         } else {
 
