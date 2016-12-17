@@ -18,6 +18,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.justinmutsito.coolquotes.coolquotes.database.DBOpenHelper;
 import com.justinmutsito.coolquotes.coolquotes.R;
 import com.justinmutsito.coolquotes.coolquotes.preferences.Preferences;
+import com.justinmutsito.coolquotes.coolquotes.utils.Quotes;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -65,7 +66,8 @@ public class CategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(getString(R.string.bundleKey));
         int position = bundle.getInt(getString(R.string.categoryKey));
-        getQuotes(position);
+        Quotes quotes = new Quotes(this,position);
+        mQuotes = quotes.getQuotes();
 
         setQuotes(mQuotePosition);
         animateViews();
@@ -75,62 +77,6 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
 
-    private void getQuotes(int position) {
-
-        //Select which string array of quotes to use
-        switch (position) {
-
-            case 0: {
-                mQuotes = getResources().getStringArray(R.array.Books);
-                break;
-            }
-
-            case 1: {
-                mQuotes = getResources().getStringArray(R.array.Business);
-                break;
-            }
-
-
-            case 2: {
-                mQuotes = getResources().getStringArray(R.array.Dreams);
-                break;
-            }
-
-            case 3: {
-                mQuotes = getResources().getStringArray(R.array.Funny);
-                break;
-            }
-
-            case 4: {
-                mQuotes = getResources().getStringArray(R.array.Humour);
-                break;
-            }
-
-            case 5: {
-                mQuotes = getResources().getStringArray(R.array.Humanity);
-                break;
-            }
-            case 6: {
-                mQuotes = getResources().getStringArray(R.array.Inspiration);
-                break;
-            }
-
-            case 7: {
-                mQuotes = getResources().getStringArray(R.array.Success);
-                break;
-            }
-            case 8: {
-                mQuotes = getResources().getStringArray(R.array.Teamwork);
-                break;
-            }
-
-            default: {
-                mQuotes = getResources().getStringArray(R.array.Love);
-            }
-        }
-
-
-    }
 
     private void setQuotes(int count) {
 

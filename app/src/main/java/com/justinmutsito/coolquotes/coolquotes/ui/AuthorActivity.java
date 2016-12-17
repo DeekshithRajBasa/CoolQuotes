@@ -18,6 +18,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.justinmutsito.coolquotes.coolquotes.database.DBOpenHelper;
 import com.justinmutsito.coolquotes.coolquotes.R;
 import com.justinmutsito.coolquotes.coolquotes.preferences.Preferences;
+import com.justinmutsito.coolquotes.coolquotes.utils.Quotes;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -66,8 +67,8 @@ public class AuthorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(getString(R.string.authorsKey));
         int position = bundle.getInt(getString(R.string.bundleKey));
-        getQuotes(position);
-
+        Quotes quotes = new Quotes(this,position);
+        mQuotes = quotes.getQuotes();
         //Set quotes.
         setQuotes(mQuotePosition);
 
@@ -78,123 +79,6 @@ public class AuthorActivity extends AppCompatActivity {
         mDBOpenHelper = new DBOpenHelper(this);
     }
 
-    private void getQuotes(int n) {
-
-        //Select which string array of quotes to use
-        switch (n) {
-
-            case 0: {
-                mQuotes = getResources().getStringArray(R.array.Albert_Einstein);
-                break;
-            }
-            case 1: {
-                mQuotes = getResources().getStringArray(R.array.Abraham_Lincoln);
-                break;
-            }
-
-
-            case 2: {
-                mQuotes = getResources().getStringArray(R.array.Benjamin_Franklin);
-                break;
-            }
-
-            case 3: {
-                mQuotes = getResources().getStringArray(R.array.Bill_Gates);
-                break;
-            }
-
-            case 4: {
-                mQuotes = getResources().getStringArray(R.array.Bill_Cosby);
-                break;
-            }
-
-            case 5: {
-                mQuotes = getResources().getStringArray(R.array.Confucius);
-                break;
-            }
-            case 6: {
-                mQuotes = getResources().getStringArray(R.array.Charles_Darwin);
-                break;
-            }
-
-            case 7: {
-                mQuotes = getResources().getStringArray(R.array.Charles_Dickens);
-                break;
-            }
-
-            case 8: {
-                mQuotes = getResources().getStringArray(R.array.Charlie_Chaplin);
-                break;
-            }
-            case 9: {
-                mQuotes = getResources().getStringArray(R.array.Ernest_Hemingway);
-                break;
-            }
-
-            case 10: {
-                mQuotes = getResources().getStringArray(R.array.Ernesto_Guevara);
-                break;
-            }
-
-            case 11: {
-                mQuotes = getResources().getStringArray(R.array.George_Bernard_Shaw);
-                break;
-            }
-            case 12: {
-                mQuotes = getResources().getStringArray(R.array.Henry_Ford);
-                break;
-            }
-
-            case 13: {
-                mQuotes = getResources().getStringArray(R.array.Julian_Assange);
-                break;
-            }
-            case 14: {
-                mQuotes = getResources().getStringArray(R.array.Karl_Marx);
-                break;
-            }
-
-            case 15: {
-                mQuotes = getResources().getStringArray(R.array.Mahatma_Gandhi);
-                break;
-            }
-            case 16: {
-                mQuotes = getResources().getStringArray(R.array.Mother_Teresa);
-                break;
-            }
-
-            case 17: {
-                mQuotes = getResources().getStringArray(R.array.Mark_Twain);
-                break;
-            }
-
-            case 18: {
-                mQuotes = getResources().getStringArray(R.array.Oscar_Wilde);
-                break;
-            }
-
-            case 19: {
-                mQuotes = getResources().getStringArray(R.array.Socrates);
-                break;
-            }
-            case 20: {
-                mQuotes = getResources().getStringArray(R.array.Steven_Jobs);
-                break;
-            }
-
-            case 21: {
-                mQuotes = getResources().getStringArray(R.array.William_Shakespeare);
-                break;
-            }
-
-
-            default: {
-                mQuotes = getResources().getStringArray(R.array.Warren_Buffett);
-
-            }
-        }
-
-    }
 
 
     private void setQuotes(int count) {

@@ -16,6 +16,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.justinmutsito.coolquotes.coolquotes.R;
 import com.justinmutsito.coolquotes.coolquotes.database.DBOpenHelper;
 import com.justinmutsito.coolquotes.coolquotes.preferences.Preferences;
+import com.justinmutsito.coolquotes.coolquotes.utils.Quotes;
 
 import java.util.Random;
 
@@ -76,7 +77,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void initUi() {
         randomQuote();
-        getQuotes(mPersonNumber);
+        Quotes quotes = new Quotes(this,mPersonNumber);
+        mQuotes = quotes.getQuotes();
+        mFace.setImageResource(quotes.getAuthorFace());
         mCurrentQuote = mQuotes[mPosition];
         mQuote.setText(mCurrentQuote);
     }
@@ -182,147 +185,6 @@ public class WelcomeActivity extends AppCompatActivity {
         Random r = new Random();
         mPersonNumber = r.nextInt(NUMBER_OF_PEOPLE - 1);
         mPosition = r.nextInt(MINIMUM_NUMBER_OF_QUOTES - 1);
-
-    }
-
-    private void getQuotes(int n) {
-
-        //Select which string array of quotes to use
-        switch (n) {
-
-            case 0: {
-                mQuotes = getResources().getStringArray(R.array.Albert_Einstein);
-                mFace.setImageResource(R.drawable.bg_albert);//Put authors's face
-                break;
-            }
-            case 1: {
-                mQuotes = getResources().getStringArray(R.array.Abraham_Lincoln);
-                mFace.setImageResource(R.drawable.bg_abraham);
-                break;
-            }
-
-
-            case 2: {
-                mQuotes = getResources().getStringArray(R.array.Benjamin_Franklin);
-                mFace.setImageResource(R.drawable.bg_benjamin);
-                break;
-            }
-
-            case 3: {
-                mQuotes = getResources().getStringArray(R.array.Bill_Gates);
-                mFace.setImageResource(R.drawable.bg_bill_gates);
-                break;
-            }
-
-            case 4: {
-                mQuotes = getResources().getStringArray(R.array.Bill_Cosby);
-                mFace.setImageResource(R.drawable.bg_bill_cosby);
-                break;
-            }
-
-            case 5: {
-                mQuotes = getResources().getStringArray(R.array.Confucius);
-                mFace.setImageResource(R.drawable.bg_confucius);
-                break;
-            }
-            case 6: {
-                mQuotes = getResources().getStringArray(R.array.Charles_Darwin);
-                mFace.setImageResource(R.drawable.bg_charles_darwin);
-                break;
-            }
-
-            case 7: {
-                mQuotes = getResources().getStringArray(R.array.Charles_Dickens);
-                mFace.setImageResource(R.drawable.bg_charles_dickens);
-                break;
-            }
-
-            case 8: {
-                mQuotes = getResources().getStringArray(R.array.Charlie_Chaplin);
-                mFace.setImageResource(R.drawable.bg_charlie_chaplin);
-                break;
-            }
-            case 9: {
-                mQuotes = getResources().getStringArray(R.array.Ernest_Hemingway);
-                mFace.setImageResource(R.drawable.bg_ernest_hemingway);
-                break;
-            }
-
-            case 10: {
-                mQuotes = getResources().getStringArray(R.array.Ernesto_Guevara);
-                mFace.setImageResource(R.drawable.bg_ernesto);
-                break;
-            }
-
-            case 11: {
-                mQuotes = getResources().getStringArray(R.array.George_Bernard_Shaw);
-                mFace.setImageResource(R.drawable.bg_george_bernard);
-                break;
-            }
-            case 12: {
-                mQuotes = getResources().getStringArray(R.array.Henry_Ford);
-                mFace.setImageResource(R.drawable.bg_henry_ford);
-                break;
-            }
-
-            case 13: {
-                mQuotes = getResources().getStringArray(R.array.Julian_Assange);
-                mFace.setImageResource(R.drawable.bg_julian__assange);
-                break;
-            }
-            case 14: {
-                mQuotes = getResources().getStringArray(R.array.Karl_Marx);
-                mFace.setImageResource(R.drawable.bg_karl_marx);
-                break;
-            }
-
-            case 15: {
-                mQuotes = getResources().getStringArray(R.array.Mahatma_Gandhi);
-                mFace.setImageResource(R.drawable.bg_mahatma__gandhi);
-                break;
-            }
-            case 16: {
-                mQuotes = getResources().getStringArray(R.array.Mother_Teresa);
-                mFace.setImageResource(R.drawable.bg_mother_teresa);
-                break;
-            }
-
-            case 17: {
-                mQuotes = getResources().getStringArray(R.array.Mark_Twain);
-                mFace.setImageResource(R.drawable.bg_mark_twain);
-                break;
-            }
-
-            case 18: {
-                mQuotes = getResources().getStringArray(R.array.Oscar_Wilde);
-                mFace.setImageResource(R.drawable.bg_oscar_wilde);
-                break;
-            }
-
-            case 19: {
-                mQuotes = getResources().getStringArray(R.array.Socrates);
-                mFace.setImageResource(R.drawable.bg_socrates);
-                break;
-            }
-            case 20: {
-                mQuotes = getResources().getStringArray(R.array.Steven_Jobs);
-                mFace.setImageResource(R.drawable.bg_steve_jobs);
-                break;
-            }
-
-            case 21: {
-                mQuotes = getResources().getStringArray(R.array.William_Shakespeare);
-                mFace.setImageResource(R.drawable.bg_william_shakespeare);
-                break;
-            }
-
-
-            default: {
-                mQuotes = getResources().getStringArray(R.array.Warren_Buffett);
-                mFace.setImageResource(R.drawable.bg_warren_buffet);
-
-            }
-        }
 
     }
 

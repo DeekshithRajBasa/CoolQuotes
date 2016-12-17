@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.NotificationActivity"
     >
-
     <ImageView
         android:id="@+id/fadedImage"
         android:layout_width="match_parent"
