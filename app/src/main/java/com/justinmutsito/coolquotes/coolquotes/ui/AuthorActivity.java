@@ -10,14 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.justinmutsito.coolquotes.coolquotes.database.DBOpenHelper;
 import com.justinmutsito.coolquotes.coolquotes.R;
+import com.justinmutsito.coolquotes.coolquotes.database.DBOpenHelper;
 import com.justinmutsito.coolquotes.coolquotes.preferences.Preferences;
+import com.justinmutsito.coolquotes.coolquotes.utils.OnSwipeTouchListener;
 import com.justinmutsito.coolquotes.coolquotes.utils.Quotes;
 
 import butterknife.Bind;
@@ -50,7 +52,8 @@ public class AuthorActivity extends AppCompatActivity {
     ImageView mNext;
     @Bind(R.id.quoteCount)
     TextView mQuoteCount;
-
+    @Bind(R.id.relativeLayout)
+    RelativeLayout mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +70,7 @@ public class AuthorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(getString(R.string.authorsKey));
         int position = bundle.getInt(getString(R.string.bundleKey));
-        Quotes quotes = new Quotes(this,position);
+        Quotes quotes = new Quotes(this, position);
         mQuotes = quotes.getQuotes();
         //Set quotes.
         setQuotes(mQuotePosition);
@@ -77,8 +80,19 @@ public class AuthorActivity extends AppCompatActivity {
 
         //Open database for related operations.
         mDBOpenHelper = new DBOpenHelper(this);
-    }
 
+
+        //Listen for gestures.
+        mLayout.setOnTouchListener(new OnSwipeTouchListener(AuthorActivity.this) {
+            public void onSwipeRight() {
+                next();
+            }
+
+            public void onSwipeLeft() {
+                previous();
+            }
+        });
+    }
 
 
     private void setQuotes(int count) {
@@ -93,12 +107,11 @@ public class AuthorActivity extends AppCompatActivity {
 
     }
 
-
     @OnClick(R.id.previousIcon)
     public void previous() {
 
         if (mQuotePosition < 3) {
-            mQuotePosition=0;
+            mQuotePosition = 0;
             setQuotes(mQuotePosition);
 
         } else {
@@ -314,5 +327,8 @@ public class AuthorActivity extends AppCompatActivity {
         super.onPause();
         mDBOpenHelper.close();
 
+
     }
+
+
 }

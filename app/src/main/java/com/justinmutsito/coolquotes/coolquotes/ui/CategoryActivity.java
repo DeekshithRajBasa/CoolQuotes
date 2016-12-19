@@ -10,14 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.justinmutsito.coolquotes.coolquotes.database.DBOpenHelper;
 import com.justinmutsito.coolquotes.coolquotes.R;
+import com.justinmutsito.coolquotes.coolquotes.database.DBOpenHelper;
 import com.justinmutsito.coolquotes.coolquotes.preferences.Preferences;
+import com.justinmutsito.coolquotes.coolquotes.utils.OnSwipeTouchListener;
 import com.justinmutsito.coolquotes.coolquotes.utils.Quotes;
 
 import butterknife.Bind;
@@ -30,6 +32,12 @@ public class CategoryActivity extends AppCompatActivity {
     private int mQuotePosition;
     private DBOpenHelper mDBOpenHelper;
 
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_MAX_OFF_PATH = 250;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+    private final String TAG1 = getClass().getSimpleName();
+    private final String TAG2 = CategoryActivity.class.getSimpleName();
 
     @Bind(R.id.backgroundImage)
     ImageView mBackgroundImage;
@@ -51,7 +59,8 @@ public class CategoryActivity extends AppCompatActivity {
     ImageView mNext;
     @Bind(R.id.quoteCount)
     TextView mQuoteCount;
-
+    @Bind(R.id.relativeLayout)
+    RelativeLayout mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +75,7 @@ public class CategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(getString(R.string.bundleKey));
         int position = bundle.getInt(getString(R.string.categoryKey));
-        Quotes quotes = new Quotes(this,position);
+        Quotes quotes = new Quotes(this, position);
         mQuotes = quotes.getQuotes();
 
         setQuotes(mQuotePosition);
@@ -74,8 +83,19 @@ public class CategoryActivity extends AppCompatActivity {
 
         //Open database for related operations
         mDBOpenHelper = new DBOpenHelper(this);
-    }
 
+
+        //Listen for gestures.
+        mLayout.setOnTouchListener(new OnSwipeTouchListener(this) {
+            public void onSwipeRight() {
+                next();
+            }
+
+            public void onSwipeLeft() {
+                previous();
+            }
+        });
+    }
 
 
     private void setQuotes(int count) {
@@ -95,7 +115,7 @@ public class CategoryActivity extends AppCompatActivity {
     public void previous() {
 
         if (mQuotePosition < 3) {
-            mQuotePosition=0;
+            mQuotePosition = 0;
             setQuotes(mQuotePosition);
         } else {
             mQuotePosition -= 4;
@@ -103,8 +123,6 @@ public class CategoryActivity extends AppCompatActivity {
             animateViews();
         }
     }
-
-
 
 
     @OnClick(R.id.nextIcon)
@@ -315,5 +333,6 @@ public class CategoryActivity extends AppCompatActivity {
         mDBOpenHelper.close();
         mQuotePosition = 0;
     }
+
 }
 
