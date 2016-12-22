@@ -13,15 +13,15 @@ import android.view.View.OnTouchListener;
 
 public class OnSwipeTouchListener implements OnTouchListener {
 
-    private final GestureDetector gestureDetector;
+    private final GestureDetector mGestureDetector;
 
     public OnSwipeTouchListener (Context context){
-        gestureDetector = new GestureDetector(context, new GestureListener());
+        mGestureDetector = new GestureDetector(context, new GestureListener());
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
-        return gestureDetector.onTouchEvent(event);
+        return mGestureDetector.onTouchEvent(event);
     }
 
     private final class GestureListener extends SimpleOnGestureListener {

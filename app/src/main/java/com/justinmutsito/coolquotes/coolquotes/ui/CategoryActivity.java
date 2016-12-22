@@ -32,12 +32,6 @@ public class CategoryActivity extends AppCompatActivity {
     private int mQuotePosition;
     private DBOpenHelper mDBOpenHelper;
 
-    private static final int SWIPE_MIN_DISTANCE = 120;
-    private static final int SWIPE_MAX_OFF_PATH = 250;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-
-    private final String TAG1 = getClass().getSimpleName();
-    private final String TAG2 = CategoryActivity.class.getSimpleName();
 
     @Bind(R.id.backgroundImage)
     ImageView mBackgroundImage;
