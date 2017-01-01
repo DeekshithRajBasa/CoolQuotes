@@ -26,11 +26,15 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class FavouritesActivity extends ListActivity {
     private ArrayList<String> mFavourites;
     private DBOpenHelper mDBOpenHelper;
-    private Bundle savedInstanceState;
+    private FavouritesAdapter mFavouritesAdapter;
+
 
 
     @Bind(R.id.backgroundImage)
     ImageView mBackgroundImage;
+    @Bind(android.R.id.list)
+    ListView mFavouritesList;
+
     @Bind(R.id.fadedImage)
     ImageView mFadedImage;
     @Bind(android.R.id.empty)
@@ -87,8 +91,8 @@ public class FavouritesActivity extends ListActivity {
             cursor.moveToNext();
         }
 
-        FavouritesAdapter adapter = new FavouritesAdapter(FavouritesActivity.this,mFavourites);
-        setListAdapter(adapter);
+        mFavouritesAdapter = new FavouritesAdapter(FavouritesActivity.this,mFavourites);
+        mFavouritesList.setAdapter(mFavouritesAdapter);
     }
 
 
@@ -126,7 +130,7 @@ public class FavouritesActivity extends ListActivity {
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismissWithAnimation();
                                     mDBOpenHelper.delete(mFavourites.get(location));
-                                    onCreate(savedInstanceState);
+                                    mFavouritesAdapter.notifyDataSetChanged();
                                 }
                             })
                             .show();
